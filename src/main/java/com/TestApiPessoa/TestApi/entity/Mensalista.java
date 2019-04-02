@@ -2,15 +2,35 @@ package com.TestApiPessoa.TestApi.entity;
 
 import com.TestApiPessoa.TestApi.entity.Interface.Empregado;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Mensalista extends Pessoa implements Empregado {
+public class Mensalista  implements Empregado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    private String name;
     private Double valorHora;
     private Double qtdHorasTrab;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @Override
     public Double calculalrSalarioLiquido() {

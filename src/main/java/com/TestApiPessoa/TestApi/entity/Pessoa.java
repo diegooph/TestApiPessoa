@@ -1,14 +1,10 @@
 package com.TestApiPessoa.TestApi.entity;
 
-public abstract class Pessoa extends Datasource {
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-    private String name;
+public abstract class Pessoa {
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getName() {
-        return name;
-    }
+
 }

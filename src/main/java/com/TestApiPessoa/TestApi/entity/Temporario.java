@@ -2,18 +2,17 @@ package com.TestApiPessoa.TestApi.entity;
 
 import com.TestApiPessoa.TestApi.entity.Interface.Empregado;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Temporario extends Pessoa implements Empregado {
+public class Temporario  implements Empregado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idTemporario;
+    private Long id;
+    @NotNull
     private String name;
     private Double valorHora;
     private Double qtdHorasTrab;
@@ -35,16 +34,33 @@ public class Temporario extends Pessoa implements Empregado {
     public String getNomeEmpregado() {
         return "Temporario: " + getName();
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public Long getIdTemporario() {
-        return idTemporario;
-    }
-
     private double getDescInss(Double salarioBruto) {
         return (salarioBruto <= 1000) ? 8.0 : 9.0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getValorHora() {
+        return valorHora;
+    }
+
+    public void setValorHora(Double valorHora) {
+        this.valorHora = valorHora;
     }
 
 }

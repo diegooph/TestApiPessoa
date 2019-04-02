@@ -2,20 +2,35 @@ package com.TestApiPessoa.TestApi.entity;
 
 import com.TestApiPessoa.TestApi.entity.Interface.Empregado;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 @Entity
-public class Horista extends Pessoa implements Empregado {
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Horista implements Empregado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idHorista;
+    private Long id;
+    @NotNull
     private String name;
+
     private Double valorHora;
     private Double qtdHorasTrab;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public Double calculalrSalarioLiquido() {
@@ -24,15 +39,7 @@ public class Horista extends Pessoa implements Empregado {
 
     @Override
     public double calcularSalarioBruto() {
-        return ((qtdHorasTrab/ 21) *5 )* valorHora;
-    }
-
-    public Long getIdHorista() {
-        return idHorista;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return ((qtdHorasTrab / 21) * 5) * valorHora;
     }
 
     @Override
