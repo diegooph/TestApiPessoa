@@ -4,12 +4,18 @@ import com.TestApiPessoa.TestApi.entity.Interface.Empregado;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 @Entity
 public class Horista extends EmpregadoImp implements Empregado {
 
-
     private Double valorHora;
     private Double qtdHorasTrab;
+
+    public Horista(Double valorHora, Double qtdHorasTrab, String name) {
+        super(name);
+        this.valorHora = valorHora;
+        this.qtdHorasTrab = qtdHorasTrab;
+    }
 
     public Double getValorHora() {
         return valorHora;

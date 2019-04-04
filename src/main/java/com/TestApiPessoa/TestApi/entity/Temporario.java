@@ -12,6 +12,12 @@ public class Temporario extends EmpregadoImp implements Empregado {
     private Double valorHora;
     private Double qtdHorasTrab;
 
+    public Temporario(Double valorHora, Double qtdHorasTrab ,String name) {
+        super(name);
+        this.valorHora = valorHora;
+        this.qtdHorasTrab = qtdHorasTrab;
+    }
+
     @Override
     public Double calculalrSalarioLiquido() {
         Double salarioBruto = calcularSalarioBruto();

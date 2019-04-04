@@ -1,69 +1,81 @@
 package com.TestApiPessoa.TestApi.worker;
 
-import com.TestApiPessoa.TestApi.dao.HoristaDao;
-import com.TestApiPessoa.TestApi.dao.MensalistaDao;
-import com.TestApiPessoa.TestApi.dao.TemporarioDao;
+import com.TestApiPessoa.TestApi.dao.EmpregadoDao;
 import com.TestApiPessoa.TestApi.dto.EmpregadoDto;
+import com.TestApiPessoa.TestApi.entity.EmpregadoImp;
 import com.TestApiPessoa.TestApi.entity.Horista;
 import com.TestApiPessoa.TestApi.entity.Mensalista;
 import com.TestApiPessoa.TestApi.entity.Temporario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmpregadoWorker {
 
     @Autowired
-    private HoristaDao horistaDao;
+    private HoristaWorker horistaWorker;
     @Autowired
-    private MensalistaDao mensalistaDao;
+    private MensalistaWorker mensalistaWorker;
     @Autowired
-    private TemporarioDao temporarioDao;
+    private TemporarioWorker temporarioWorker;
+    @Autowired
+    private EmpregadoDao empregadoDao;
 
-
-    public EmpregadoWorker() {
-
-    }
-
-
-    public void savaEmpregado(EmpregadoDto empregadoDto) {
+    public void save(EmpregadoDto empregadoDto) {
         switch (empregadoDto.tipoEmpregado) {
             case "mensalista":
-                saveMensalista(empregadoDto);
+                mensalistaWorker.save(castToMensalista(empregadoDto));
                 break;
             case "horista":
-                saveHorista(empregadoDto);
+                horistaWorker.save(castToHorista(empregadoDto));
                 break;
             case "temporario":
-                saveTemporario(empregadoDto);
+                temporarioWorker.save(castToTemporario(empregadoDto));
                 break;
         }
     }
 
-    private void saveMensalista(EmpregadoDto empregadoDto) {
-        Mensalista mensalista = new Mensalista();
-        mensalista.setQtdHorasTrab(empregadoDto.qtdHorasTrab);
-        mensalista.setValorHora(empregadoDto.valorHora);
-        mensalista.setName(empregadoDto.name);
-        mensalistaDao.save(mensalista);
-        return;
+    public EmpregadoImp getByid(EmpregadoDto empregadoDto) {
+        switch (empregadoDto.tipoEmpregado) {
+            case "mensalista":
+                return mensalistaWorker.getById(castToMensalista(empregadoDto).getId());
+            case "horista":
+                return horistaWorker.getById(castToHorista(empregadoDto).getId());
+            case "temporario":
+                return temporarioWorker.getById(castToTemporario(empregadoDto).getId());
+            default:
+                return null;
+        }
     }
 
-    private void saveHorista(EmpregadoDto empregadoDto) {
-        Horista horista = new Horista();
-        horista.setQtdHorasTrab(empregadoDto.qtdHorasTrab);
-        horista.setValorHora(empregadoDto.valorHora);
-        horista.setName(empregadoDto.name);
-        horistaDao.save(horista);
-    }
-
-    private void saveTemporario(EmpregadoDto empregadoDto) {
-        Temporario temporario = new Temporario();
-        temporario.setQtdHorasTrab(empregadoDto.qtdHorasTrab);
-        temporario.setValorHora(empregadoDto.valorHora);
-        temporario.setName(empregadoDto.name);
-        temporarioDao.save(temporario);
+    public List<EmpregadoImp> getAll(EmpregadoDto empregadoDto) {
+        return empregadoDao.findAll();
     }
 
 
+    private Temporario castToTemporario(EmpregadoDto empregadoDto) {
+        return new Temporario(
+                empregadoDto.valorHora,
+                empregadoDto.qtdHorasTrab,
+                empregadoDto.name
+        );
+    }
+
+    private Horista castToHorista(EmpregadoDto empregadoDto) {
+        return new Horista(
+                empregadoDto.valorHora,
+                empregadoDto.qtdHorasTrab,
+                empregadoDto.name
+        );
+    }
+
+    private Mensalista castToMensalista(EmpregadoDto empregadoDto) {
+        return new Mensalista(
+                empregadoDto.valorHora,
+                empregadoDto.qtdHorasTrab,
+                empregadoDto.name
+        );
+    }
 }

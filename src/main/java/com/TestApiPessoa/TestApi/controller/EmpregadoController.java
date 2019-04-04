@@ -15,6 +15,6 @@ public class EmpregadoController {
     EmpregadoWorker empregadoWorker;
     @PostMapping("/save")
     public void save(@RequestBody EmpregadoDto empregadoDto){
-        empregadoWorker.savaEmpregado(empregadoDto);
+        empregadoWorker.save(empregadoDto);
     }
 }
