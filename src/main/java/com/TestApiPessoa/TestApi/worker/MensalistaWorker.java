@@ -13,18 +13,7 @@ public class MensalistaWorker {
     @Autowired
     private MensalistaDao mensalistaDao;
 
-    public void save(Mensalista mensalista) {
-        mensalistaDao.save(mensalista);
-    }
-    public void delete(Mensalista horista) {
-        mensalistaDao.delete(horista);
-    }
-
-    public Mensalista getById(Long id) {
-        return mensalistaDao.getOne(id);
-    }
-
-    public List<Mensalista> getAllHoristas() {
+    public List<Mensalista> getAll() {
         return mensalistaDao.findAll();
     }
 

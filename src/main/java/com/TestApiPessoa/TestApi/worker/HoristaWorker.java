@@ -18,19 +18,7 @@ public class HoristaWorker {
     @Autowired
     private HoristaDao horistaDao;
 
-    public void save(Horista horista) {
-        horistaDao.save(horista);
-    }
-
-    public void delete(Horista horista) {
-        horistaDao.delete(horista);
-    }
-
-    public Horista getById(Long id) {
-        return horistaDao.getOne(id);
-    }
-
-    public List<Horista> getAllHoristas() {
+    public List<Horista> getAll() {
         return horistaDao.findAll();
     }
 

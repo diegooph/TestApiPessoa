@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Mensalista extends EmpregadoImp implements Empregado {
+public class Mensalista extends EmpregadoImp {
 
     private Double valorHora;
     private Double qtdHorasTrab;
@@ -15,6 +15,10 @@ public class Mensalista extends EmpregadoImp implements Empregado {
         super(name);
         this.valorHora = valorHora;
         this.qtdHorasTrab = qtdHorasTrab;
+    }
+
+    public Mensalista() {
+       super("JpAConfiguration");
     }
 
     @Override

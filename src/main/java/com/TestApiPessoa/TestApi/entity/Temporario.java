@@ -1,13 +1,9 @@
 package com.TestApiPessoa.TestApi.entity;
 
-import com.TestApiPessoa.TestApi.entity.Interface.Empregado;
-
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 @Entity
-public class Temporario extends EmpregadoImp implements Empregado {
+public class Temporario extends EmpregadoImp {
 
     private Double valorHora;
     private Double qtdHorasTrab;
@@ -17,7 +13,9 @@ public class Temporario extends EmpregadoImp implements Empregado {
         this.valorHora = valorHora;
         this.qtdHorasTrab = qtdHorasTrab;
     }
-
+    public Temporario() {
+        super("JpAConfiguration");
+    }
     @Override
     public Double calculalrSalarioLiquido() {
         Double salarioBruto = calcularSalarioBruto();
@@ -35,10 +33,6 @@ public class Temporario extends EmpregadoImp implements Empregado {
         return "Temporario: " + getName();
     }
 
-    private double getDescInss(Double salarioBruto) {
-        return (salarioBruto <= 1000) ? 8.0 : 9.0;
-    }
-
     public Double getValorHora() {
         return valorHora;
     }
@@ -53,5 +47,9 @@ public class Temporario extends EmpregadoImp implements Empregado {
 
     public void setQtdHorasTrab(Double qtdHorasTrab) {
         this.qtdHorasTrab = qtdHorasTrab;
+    }
+
+    private double getDescInss(Double salarioBruto) {
+        return (salarioBruto <= 1000) ? 8.0 : 9.0;
     }
 }

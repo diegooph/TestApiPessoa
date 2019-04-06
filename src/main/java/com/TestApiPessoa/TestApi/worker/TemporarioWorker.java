@@ -15,19 +15,7 @@ public class TemporarioWorker {
     @Autowired
     private TemporarioDao temporarioDao;
 
-    public void save(Temporario temporario) {
-        temporarioDao.save(temporario);
-    }
-
-    public void delete(Temporario horista) {
-        temporarioDao.delete(horista);
-    }
-
-    public Temporario getById(Long id) {
-        return temporarioDao.getOne(id);
-    }
-
-    public List<Temporario> getAllHoristas() {
+    public List<Temporario> getAll() {
         return temporarioDao.findAll();
     }
 }
